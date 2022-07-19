@@ -7,6 +7,12 @@ import string
 from google.oauth2 import service_account
 import gspread
 
+from pathlib import Path
+import os 
+
+# This will point to mnt/ NOT the directory where this file lives (mnt/notebooks/scratch), when run as a Domino Job 
+current_dir = os.getcwd()
+
 ## Read in service account credentials - link to whichever json file holds your credentials
 gc = gspread.service_account(filename='/mnt/data/odt-data-profiler-069defc7abf3.json')
 
@@ -23,12 +29,13 @@ def profile_data(list_of_lists):
         dataset_name = list_of_lists[i]['dataset']
         dataset_url = list_of_lists[i]['url']
         df = pd.read_json(dataset_url)
-        for d in df:
-            prl = ProfileReport(d, title="Data Profiler", html={"style": {"full_width": True}}, sort=None)
-        return(prl)
-    prl.to_file("testing_7_19_2022.html")
-
+        prl = ProfileReport(df, title=f"{dataset_name}_Data_Profiler", html={"style": {"full_width": True}}, sort=None)
+        prl.to_file(f"testing_{dataset_name}.html")
+        #prl.to_file(f"testing_{dataset_name}.html")
     
 # Run function
-profile_data(list_of_lists)
-print("Success!")
+out = profile_data(list_of_lists)
+
+with open(Path(current_dir, 'notebooks', 'scratch', 'outputs', f'{out}.html'), 'w') as outpath:
+    outpath.write(out)
+    
