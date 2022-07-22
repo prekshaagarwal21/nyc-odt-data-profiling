@@ -61,8 +61,11 @@ list_of_lists = worksheet2.get_all_records()
 
 
 # Profile each dataset
-def profile_data(list_of_lists):
+def profile_data(list_of_lists, todaystr):
     for i in range (0,len(list_of_lists)):
+        #today = datetime.date.today()  
+        #todaystr = today.isoformat()
+        agency_name = list_of_lists[i]['agency']
         dataset_name = list_of_lists[i]['dataset']
         dataset_url = list_of_lists[i]['url']
         df = pd.read_json(dataset_url)
@@ -70,13 +73,13 @@ def profile_data(list_of_lists):
         #st.title(f"{dataset_name} in Streamlit!")
         #st.write(df)
         #st_profile_report(prl)
-        out = "Hello"
-        with open(Path(current_dir, todaystr, f'{dataset_name}.html'), 'w+') as outpath:
-            outpath.write(out)
-        #prl.to_file("test.html")
-        #out = prl.to_file(f"testing_{dataset_name}.json")
-        #with open(Path(current_dir, todaystr, f'{prl}.html'), 'w+') as outpath:
+        #out = "Hello"
+        #with open(Path(current_dir, todaystr, f'{dataset_name}.html'), 'w+') as outpath:
         #    outpath.write(out)
+        out = prl.to_file(f"{todaystr}_{agency_name}_{dataset_name}.html")
+        #out = prl.to_file("/mnt/nyc-odt-data-profiling/f"{todaystr}_{agency_name}_{dataset_name}.html"")
+        #with open(Path(current_dir, todaystr, f'{agency_name}_{dataset_name}.html'), 'w') as outpath:
+        #    outpath.write(prl)
         #prl.to_html(current_dir + "/" + "test.html")
         #prl.to_html("test.html")
         #pdf.from_file('test.html', 'test.pdf')
@@ -85,4 +88,4 @@ def profile_data(list_of_lists):
 # Run function
 #out = profile_data(list_of_lists)
 
-profile_data(list_of_lists)
+profile_data(list_of_lists, todaystr)
