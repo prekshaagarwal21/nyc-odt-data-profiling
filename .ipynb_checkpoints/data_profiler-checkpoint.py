@@ -8,7 +8,8 @@ import gspread
 from pathlib import Path
 import os 
 import time, datetime, os
-import shutil 
+import shutil
+import requests
 
 # Check today's date and create a directory file structure for today's date.
 today = datetime.date.today()  
@@ -49,13 +50,14 @@ worksheet = sh.get_worksheet(0)
 list_of_lists = worksheet.get_all_records()
 
 
-# Profile each dataset
+# Function to profile each dataset
 def profile_data(list_of_lists):
     for i in range (0,len(list_of_lists)):
         agency_name = list_of_lists[i]['agency']
         dataset_name = list_of_lists[i]['dataset']
         dataset_url = list_of_lists[i]['url']
-        df = pd.read_json(dataset_url)
+        r = requests.get(dataset_url+"?$limit=500000", auth=("8febnpgtxedbep4no9oqegrce","36g68l45jhsdzeu08j3i44j4nxn2t65ua1gw4o0xwa9o17ownv"), timeout=None)
+        df = pd.DataFrame(r.json()) #pd.read_json(dataset_url)
         prl = ProfileReport(df, title=f"{dataset_name}_Data_Profiler", html={"style": {"full_width": True}}, sort=None,
             correlations=None,
             interactions=None,
