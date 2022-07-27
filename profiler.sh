@@ -8,7 +8,7 @@ sudo pip install gspread
 #sudo pip install streamlit_pandas_profiling
 #sudo pip install cairosvg
 
-python data_profiler.py
+python /repos/nyc-odt-data-profiling/data_profiler.py
 
 #mv /repos/nyc-odt-data-profiling/*.html /mnt/.
 

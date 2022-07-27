@@ -57,7 +57,7 @@ def profile_data(list_of_lists):
         dataset_name = list_of_lists[i]['dataset']
         dataset_url = list_of_lists[i]['url']
         #limit = dataset_url+"?$select=count(*)
-        chunk_size = 1000000
+        chunk_size = 100000
         offset = 0
         reached_end_of_dataset = False
         tmp_dfs = []
@@ -75,7 +75,6 @@ def profile_data(list_of_lists):
 
         out_df = pd.concat(tmp_dfs, axis=0)
         #r = requests.get(dataset_url+f"?$limit=500000", auth=("8febnpgtxedbep4no9oqegrce","36g68l45jhsdzeu08j3i44j4nxn2t65ua1gw4o0xwa9o17ownv"), timeout=None)
-        #df = pd.DataFrame(r.json()) #pd.read_json(dataset_url)
         prl = ProfileReport(out_df, title=f"{dataset_name}_Data_Profiler", html={"style": {"full_width": True}}, sort=None,
             correlations=None,
             interactions=None,
