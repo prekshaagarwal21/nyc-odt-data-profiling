@@ -21,17 +21,7 @@ def create_date_dir():
     if not os.path.exists(d):
         os.mkdir(d)
     else:
-        '''#if os.path.exists(d):
-        #    i += 1
-        #    d = d[:10] + '_' + str(i).zfill(2)
-        #os.mkdir(d)
-        #else:
-        #    m = re.findall(r'\w\w$', d)
-        #    i = float(m[0:]) + 1
-        #    d = d[:10] + '_' + str(i).zfill(2)
-        #os.mkdir(d)'''
         shutil.rmtree(d)
-        #os.rmdir(d)
         os.mkdir(d)
         
 create_date_dir()
@@ -55,7 +45,7 @@ def profile_data(list_of_lists):
     for i in range (0,len(list_of_lists)):
         agency_name = list_of_lists[i]['agency']
         dataset_name = list_of_lists[i]['dataset']
-        dataset_url = list_of_lists[i]['url']
+        dataset_url = list_of_lists[i]['api_endpoint']
         #limit = dataset_url+"?$select=count(*)
         chunk_size = 100000
         offset = 0
