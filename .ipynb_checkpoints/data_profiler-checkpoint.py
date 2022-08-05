@@ -45,8 +45,8 @@ def profile_data(list_of_lists):
     for i in range (0,len(list_of_lists)):
         agency_name = list_of_lists[i]['agency']
         dataset_name = list_of_lists[i]['dataset']
-        dataset_url = list_of_lists[i]['api_endpoint']
-        #limit = dataset_url+"?$select=count(*)
+        url = list_of_lists[i]['4x4']
+        dataset_url = f'https://data.cityofnewyork.us/resource/{url}.json'
         chunk_size = 100000
         offset = 0
         reached_end_of_dataset = False
