@@ -10,6 +10,20 @@ import os
 import time, datetime, os
 import shutil
 import requests
+#path = '/repos/nyc-odt-data-profiling'
+#if path not in sys.path:
+#    sys.path.append(path)
+#import sys
+#print(sys.path)
+#import config
+
+import json
+
+# Defining Socrata API Key and Secret Key from config file
+with open('/repos/nyc-odt-data-profiling/config.json', 'r') as f:
+    config = json.load(f)
+    key = config['socrata_api_key']
+    secret = config['socrata_secret_key']
 
 ## Check today's date and create a directory file structure for today's date.
 today = datetime.date.today()  
@@ -56,7 +70,7 @@ def profile_data(list_of_lists):
         tmp_dfs = []
         while not reached_end_of_dataset:
             chunk_url = f'{dataset_url}?$limit={chunk_size}&$offset={offset}'
-            tmp_r = requests.get(chunk_url, auth=("8febnpgtxedbep4no9oqegrce","36g68l45jhsdzeu08j3i44j4nxn2t65ua1gw4o0xwa9o17ownv"), timeout=None)
+            tmp_r = requests.get(chunk_url, auth=(key,secret), timeout=None)
             tmp = pd.DataFrame(tmp_r.json())
             tmp_dfs.append(tmp)
     

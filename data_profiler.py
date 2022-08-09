@@ -10,11 +10,20 @@ import os
 import time, datetime, os
 import shutil
 import requests
-import config
+#path = '/repos/nyc-odt-data-profiling'
+#if path not in sys.path:
+#    sys.path.append(path)
+#import sys
+#print(sys.path)
+#import config
+
+import json
 
 # Defining Socrata API Key and Secret Key from config file
-key = config.socrata_api_key
-secret = config.socrata_secret_key
+with open('/repos/nyc-odt-data-profiling/config.json', 'r') as f:
+    config = json.load(f)
+    key = config['socrata_api_key']
+    secret = config['socrata_secret_key']
 
 ## Check today's date and create a directory file structure for today's date.
 today = datetime.date.today()  
