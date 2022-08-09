@@ -10,13 +10,6 @@ import os
 import time, datetime, os
 import shutil
 import requests
-#path = '/repos/nyc-odt-data-profiling'
-#if path not in sys.path:
-#    sys.path.append(path)
-#import sys
-#print(sys.path)
-#import config
-
 import json
 
 # Defining Socrata API Key and Secret Key from config file
