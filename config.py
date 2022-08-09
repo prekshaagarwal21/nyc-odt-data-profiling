@@ -1,0 +1,2 @@
+socrata_api_key="8febnpgtxedbep4no9oqegrce"
+socrata_secret_key="36g68l45jhsdzeu08j3i44j4nxn2t65ua1gw4o0xwa9o17ownv"
